@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <title>The Dark Pictures Anthology</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .interactive-zone {
+      transition: transform 0.3s ease, filter 0.3s ease;
+      transform-origin: center;
+    }
+    .interactive-zone:hover {
+      transform: scale(1.1);
+      filter: brightness(1.2);
+      cursor: pointer;
+    }
+    .map-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      max-width: 100%;
+    }
+    .map-container svg {
+      width: 100%;
+      height: auto;
+      max-width: 1505px;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.5); 
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      position: relative;
+      background: none;
+      width: 500px;
+      padding: 20px;
+      text-align: center;
+      font-family: 'IM Fell English SC', serif;
+    }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 24px;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .paragraph-interactive-area--description p {
+      font-size: 1.5vh;
+      color: #333333; 
+    }
+    .universe-cta {
+      color: #ff4d4d;
+      text-decoration: underline;
+    }
+    .universe-cta:hover {
+      color: #cc0000;
+    }
+  </style>
+</head>
+<body onload="window.scrollTo(0, 0)">
+  <video autoplay muted loop class="background-video">
+    <source src="anim/the-dark-pictures-header-video-triple2.webm" type="video/webm">
+    null
+  </video>
+
+  <div class="logo-container">
+    <img loading="lazy" src="images/TDP_LOGO_V2.png" width="800" height="210" alt="The Dark Pictures Anthology Logo" class="logo" data-aos="fade-in" data-aos-duration="2500">
+  </div>
+
+  <div class="content">
+    <h1 class="text-5xl font-bold text-center mb-8" data-aos="fade-up" data-aos-delay="100">Один выбор. Бесконечные последствия</h1>
+    <p class="text-xl mb-4 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">В наши дни мир наполняют тревожные слухи о необъяснимых событиях, произошедших в самых разных уголках планеты.</p>  
+    <p class="text-xl mb-4 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="300">Эти истории пугают своей загадочностью и кажутся настолько невероятными, что многие отказываются принимать их всерьез.</p>  
+    <p class="text-xl mb-4 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="400">Однако те, кому довелось стать частью этих событий, утверждают, что всё происходившее было реальным.</p>  
+    <p class="text-xl mb-4 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="500">Они клянутся, что столкнулись с силами, неподвластными человеческому пониманию, и настаивают: за этим стоит нечто большее, чем простые случайности или мифы.</p>  
+
+    <h2 class="text-4xl font-bold text-center mb-8 mt-12" data-aos="fade-up" data-aos-delay="100">Они все ждут твоего решения...</h2>
+    <div class="game-icons flex justify-center space-x-6">
+      <div class="game-icon-container" data-game="man-of-medan" data-aos="zoom-in" data-aos-delay="200">
+        <p class="game-title text-xl mb-2">The Man of Medan</p>
+        <img src="images/man-of-medan_game_thumb_408x3148_final.jpg" alt="Man of Medan" class="game-icon">
+      </div>
+      <div class="game-icon-container" data-game="little-hope" data-aos="zoom-in" data-aos-delay="300">
+        <p class="game-title text-xl mb-2">Little Hope</p>
+        <img src="images/Game_Thumbnail_2.jpg" alt="Little Hope" class="game-icon">
+      </div>
+      <div class="game-icon-container" data-game="house-of-ashes" data-aos="zoom-in" data-aos-delay="400">
+        <p class="game-title text-xl mb-2">The House of Ashes</p>
+        <img src="images/game_thumbnail.jpg" alt="House of Ashes" class="game-icon">
+      </div>
+    </div>
+
+    <div class="curator-info" data-aos="fade-up" data-aos-delay="100">
+      <img alt="" class="paragraph-curator--curator" src="images/curator.png" loading="lazy">
+      <div class="curator-text">
+        <img class="paragraph-curator-text--divider" alt="" src="images/curator_divider.png" loading="lazy">
+        <p class="paragraph-curator-text">Куратор - хранитель историй. Он не герой. Он не злодей. Он - наблюдатель. Каждая история, каждое решение, каждый результат - лишь строки в его книге.</p>
+        <img class="paragraph-curator-text--divider" alt="" src="images/curator_divider.png" loading="lazy">
+        <p class="paragraph-curator-text">Он вне времени и пространства. Куратор не принадлежит ни одному миру. Он появляется в каждой истории, как будто уже знает ее исход - но никогда не вмешивается. Почти.</p>
+        <img class="paragraph-curator-text--divider" alt="" src="images/curator_divider.png" loading="lazy">
+        <p class="paragraph-curator-text">Он - нить между всеми историями. Man of Medan, Little Hope, House of Ashes... Во всех он рядом. В каждом из мире он ждет. Возможно, все это - часть одной книги. Его книги.</p>
+        <img class="paragraph-curator-text--divider" alt="" src="images/curator_divider.png" loading="lazy">
+        <p class="paragraph-curator-text">Истории рассказаны. <br>Судьбы решены.<br>Ты сделал все, что мог... или думал, что сделал.<br>Но где конец, там и новое начало. Куратор закроет книгу, пока не откроет следующую. Но.. Когда?</p>
+      </div>
+    </div>
+
+    <div class="paragraph-interactive-area mt-12" data-aos="fade-up" data-aos-delay="200">
+      <h2 class="block-title text-3xl font-bold text-center mb-6 text-white">Каждый путь оставляет след.</h2>
+      <div class="paragraph-interactive-area--main relative">
+        <div class="map-container">
+          <div class="field field--name-field-interactive-image field--type-image field--label-hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1505" height="1015" viewBox="0 0 1505 1015">
+              <image id="Calque_1" data-name="Calque 1" width="1505" height="1015" xlink:href="images/map.png"></image>
+              <image id="interactive-zone_1" class="interactive-zone" x="105" y="651" width="116" height="71" xlink:href="images/int1.png"></image>
+              <image id="interactive-zone_3" class="interactive-zone" x="833" y="424" width="120" height="108" xlink:href="images/int2.png"></image>
+              <image id="interactive-zone_4" class="interactive-zone" x="355" y="384" width="48" height="112" xlink:href="images/int3.png"></image>
+              <image id="interactive-zone_5" class="interactive-zone" x="600" y="200" width="100" height="100" xlink:href="images/int4.png"></image>
+            </svg>
+          </div>
+        </div>
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <button class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">×</button>
+            <div class="paragraph-interactive-area--description">
+              <img id="modal-logo" alt="game-logo" data-align="center" width="300" class="mx-auto mb-4" />
+              <p id="modal-description" class="desktop text-lg mb-2"></p>
+              <p id="modal-question" class="text-lg mb-2"></p>
+              <p><a id="modal-link" class="universe-cta text-lg mt-2" href="#" tabindex="0"></a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="script.js"></script>
+  <script>
+    const modals = {
+      'interactive-zone_1': {
+        logo: 'images/man-of-medan_game_thumb_408x3148_final.jpg',
+        title: 'GAMECARD_Logo_MoM_v2',
+        description: '1',
+        question: '2',
+        link: 'man-of-medan.html',
+        linkText: '3'
+      },
+      'interactive-zone_3': {
+        logo: 'images/Game_Thumbnail_2.jpg',
+        title: 'GAMECARD_Logo_LH_v2',
+        description: '1',
+        question: '2',
+        link: '3',
+        linkText: '4'
+      },
+      'interactive-zone_4': {
+        logo: 'images/game_thumbnail.jpg',
+        title: 'GAMECARD_Logo_HoA',
+        description: '1',
+        question: '2',
+        link: 'house-of-ashes.html',
+        linkText: '3'
+      },
+      'interactive-zone_5': {
+        logo: 'https://via.placeholder.com/300x200', 
+        title: 'GAMECARD_Logo_TDIM',
+        description: '1',
+        question: '2',
+        link: '#',
+        linkText: '3'
+      }
+    };
+
+    document.querySelectorAll('.interactive-zone').forEach(zone => {
+      zone.addEventListener('click', () => {
+        const id = zone.getAttribute('id');
+        const modal = document.getElementById('modal');
+        const modalLogo = document.getElementById('modal-logo');
+        const modalDescription = document.getElementById('modal-description');
+        const modalQuestion = document.getElementById('modal-question');
+        const modalLink = document.getElementById('modal-link');
+
+        const data = modals[id];
+        modalLogo.src = data.logo;
+        modalDescription.textContent = data.description;
+        modalQuestion.textContent = data.question;
+        modalLink.href = data.link;
+        modalLink.textContent = data.linkText;
+
+        modal.classList.add('active');
+      });
+    });
+
+    document.querySelector('.modal-close').addEventListener('click', () => {
+      document.getElementById('modal').classList.remove('active');
+    });
+  </script>
+</body>
+</html>
